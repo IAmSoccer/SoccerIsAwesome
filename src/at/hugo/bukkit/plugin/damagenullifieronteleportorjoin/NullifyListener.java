@@ -58,7 +58,8 @@ public class NullifyListener implements Listener {
             event.setCancelled(true);
     }
 
-    public void update(final long immunityTime, final boolean showBossBar, final String bossBarName, final String bossBarColor, final String bossBarOverlay) {
+    public void update(final long immunityTime, final boolean showBossBar, final String bossBarName,
+            final String bossBarColor, final String bossBarOverlay) {
         this.immunityTime = immunityTime;
         this.showBossBar = showBossBar;
         this.bossBarName = LegacyComponentSerializer.legacyAmpersand().deserialize(bossBarName);
@@ -69,6 +70,7 @@ public class NullifyListener implements Listener {
     private void removePlayer(@NotNull final Player player) {
         if (players.containsKey(player)) {
             final PlayerInfo pi = players.remove(player);
+            player.setFireTicks(pi.fireTicks);
             if (!pi.removalTask.isCancelled())
                 pi.removalTask.cancel();
             if (pi.bossBarTask != null && !pi.bossBarTask.isCancelled())
@@ -84,17 +86,20 @@ public class NullifyListener implements Listener {
                 showBossBar
                         ? new BossBarTimer(player, immunityTime * 20l, 1l,
                                 BossBar.bossBar(bossBarName, 1f, bossBarColor, bossBarOverlay))
-                        : null));
+                        : null,
+                player.getFireTicks()));
 
     }
 
     private class PlayerInfo {
         public final BukkitTask removalTask;
         public final BossBarTimer bossBarTask;
+        public final int fireTicks;
 
-        public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask) {
+        public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask, final int fireTicks) {
             this.removalTask = removalTask;
             this.bossBarTask = bossBarTask;
+            this.fireTicks = fireTicks;
         }
     }
 }
