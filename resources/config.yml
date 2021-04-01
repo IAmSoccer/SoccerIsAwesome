@@ -1,0 +1,8 @@
+bossbar:
+  show: false
+  name: Immunity
+  # one of BLUE, GREEN, PINK, PURPLE, RED, WHITE or YELLOW
+  color: RED
+  # one of NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20 or PROGRESS
+  type: PROGRESS
+immunity-time: 30
