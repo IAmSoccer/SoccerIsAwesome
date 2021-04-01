@@ -1,5 +1,6 @@
 package at.hugo.bukkit.plugin.damagenullifieronteleportorjoin;
 
+import java.util.Collection;
 import java.util.WeakHashMap;
 
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,7 +92,7 @@ public class NullifyListener implements Listener {
     private void removePlayer(@NotNull final Player player) {
         if (players.containsKey(player)) {
             final PlayerInfo pi = players.remove(player);
-            player.setFireTicks(pi.fireTicks);
+            pi.applyToPlayer(player);
             if (!pi.removalTask.isCancelled())
                 pi.removalTask.cancel();
             if (pi.bossBarTask != null && !pi.bossBarTask.isCancelled())
@@ -118,6 +120,7 @@ public class NullifyListener implements Listener {
         public final int foodLevel;
         public final float saturation;
         public final float exhaustion;
+        public final Collection<PotionEffect> potionEffects;
 
         public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask, final Player player) {
             this.removalTask = removalTask;
@@ -126,12 +129,14 @@ public class NullifyListener implements Listener {
             this.foodLevel = player.getFoodLevel();
             this.saturation = player.getSaturation();
             this.exhaustion = player.getExhaustion();
+            this.potionEffects = player.getActivePotionEffects();
         }
         public void applyToPlayer(final Player player){
             player.setFireTicks(fireTicks);
             player.setFoodLevel(foodLevel);
             player.setExhaustion(exhaustion);
             player.setSaturation(saturation);
+            player.addPotionEffects(potionEffects);
         }
     }
 }
