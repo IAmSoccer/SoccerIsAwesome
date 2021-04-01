@@ -9,6 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -57,6 +59,17 @@ public class NullifyListener implements Listener {
         if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
             event.setCancelled(true);
     }
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onHunger(final FoodLevelChangeEvent event) {
+        if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
+            event.setCancelled(true);
+    }
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onHunger(final EntityRegainHealthEvent event) {
+        if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
+            event.setCancelled(true);
+    }
+
 
     public void update(final long immunityTime, final boolean showBossBar, final String bossBarName,
             final String bossBarColor, final String bossBarOverlay) {
@@ -87,7 +100,7 @@ public class NullifyListener implements Listener {
                         ? new BossBarTimer(player, immunityTime * 20l, 1l,
                                 BossBar.bossBar(bossBarName, 1f, bossBarColor, bossBarOverlay))
                         : null,
-                player.getFireTicks()));
+                player));
 
     }
 
@@ -95,11 +108,23 @@ public class NullifyListener implements Listener {
         public final BukkitTask removalTask;
         public final BossBarTimer bossBarTask;
         public final int fireTicks;
+        public final int foodLevel;
+        public final float saturation;
+        public final float exhaustion;
 
-        public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask, final int fireTicks) {
+        public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask, final Player player) {
             this.removalTask = removalTask;
             this.bossBarTask = bossBarTask;
-            this.fireTicks = fireTicks;
+            this.fireTicks = player.getFireTicks();
+            this.foodLevel = player.getFoodLevel();
+            this.saturation = player.getSaturation();
+            this.exhaustion = player.getExhaustion();
+        }
+        public void applyToPlayer(final Player player){
+            player.setFireTicks(fireTicks);
+            player.setFoodLevel(foodLevel);
+            player.setExhaustion(exhaustion);
+            player.setSaturation(saturation);
         }
     }
 }
