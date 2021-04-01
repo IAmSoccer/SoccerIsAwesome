@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -42,6 +43,12 @@ public class NullifyListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onQuit(final PlayerQuitEvent event) {
+        if (players.containsKey(event.getPlayer()))
+            removePlayer(event.getPlayer());
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onMove(final PlayerMoveEvent event) {
         if (players.containsKey(event.getPlayer()) && (event.getFrom().getX() != event.getTo().getX()
                 || event.getFrom().getY() < event.getTo().getY() || event.getFrom().getZ() != event.getTo().getZ()))
@@ -65,7 +72,7 @@ public class NullifyListener implements Listener {
             event.setCancelled(true);
     }
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
-    public void onHunger(final EntityRegainHealthEvent event) {
+    public void onRegen(final EntityRegainHealthEvent event) {
         if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
             event.setCancelled(true);
     }
