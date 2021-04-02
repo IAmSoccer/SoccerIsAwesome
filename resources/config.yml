@@ -6,3 +6,5 @@ bossbar:
   # one of NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20 or PROGRESS
   type: PROGRESS
 immunity-time: 30
+min-tp-distance: 5
+config-version: 2

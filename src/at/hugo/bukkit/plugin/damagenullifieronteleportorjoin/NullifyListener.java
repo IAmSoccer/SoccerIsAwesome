@@ -32,6 +32,7 @@ public class NullifyListener implements Listener {
     private BossBar.Overlay bossBarOverlay = BossBar.Overlay.PROGRESS;
     private boolean showBossBar = true;
     private long immunityTime = 30;
+    private double minTpDistanceSquared = 1;
     WeakHashMap<Player, PlayerInfo> players = new WeakHashMap<>();
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -41,7 +42,8 @@ public class NullifyListener implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onTeleport(final PlayerTeleportEvent event) {
-        addPlayer(event.getPlayer());
+        if (minTpDistanceSquared <= event.getFrom().distanceSquared(event.getTo()))
+            addPlayer(event.getPlayer());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -68,20 +70,22 @@ public class NullifyListener implements Listener {
         if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
             event.setCancelled(true);
     }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onHunger(final FoodLevelChangeEvent event) {
         if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
             event.setCancelled(true);
     }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onRegen(final EntityRegainHealthEvent event) {
         if (event.getEntity() instanceof Player && players.containsKey(event.getEntity()))
             event.setCancelled(true);
     }
 
-
-    public void update(final long immunityTime, final boolean showBossBar, final String bossBarName,
-            final String bossBarColor, final String bossBarOverlay) {
+    public void update(final double minTpDistance, final long immunityTime, final boolean showBossBar,
+            final String bossBarName, final String bossBarColor, final String bossBarOverlay) {
+        this.minTpDistanceSquared = minTpDistance * minTpDistance;
         this.immunityTime = immunityTime;
         this.showBossBar = showBossBar;
         this.bossBarName = LegacyComponentSerializer.legacyAmpersand().deserialize(bossBarName);
@@ -100,7 +104,7 @@ public class NullifyListener implements Listener {
         }
     }
 
-    private void addPlayer(final Player player) {
+    private void addPlayer(@NotNull final Player player) {
         removePlayer(player);
         players.put(player, new PlayerInfo(
                 Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(DamageNullifierOnTeleportOrJoinPlugin.class),
@@ -131,7 +135,8 @@ public class NullifyListener implements Listener {
             this.exhaustion = player.getExhaustion();
             this.potionEffects = player.getActivePotionEffects();
         }
-        public void applyToPlayer(final Player player){
+
+        public void applyToPlayer(final Player player) {
             player.setFireTicks(fireTicks);
             player.setFoodLevel(foodLevel);
             player.setExhaustion(exhaustion);
