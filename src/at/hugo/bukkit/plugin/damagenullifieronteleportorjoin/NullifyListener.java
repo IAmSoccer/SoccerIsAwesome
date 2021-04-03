@@ -42,7 +42,8 @@ public class NullifyListener implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onTeleport(final PlayerTeleportEvent event) {
-        if (minTpDistanceSquared <= event.getFrom().distanceSquared(event.getTo()))
+        if (!event.getFrom().getWorld().equals(event.getTo().getWorld())
+                || minTpDistanceSquared <= event.getFrom().distanceSquared(event.getTo()))
             addPlayer(event.getPlayer());
     }
 
