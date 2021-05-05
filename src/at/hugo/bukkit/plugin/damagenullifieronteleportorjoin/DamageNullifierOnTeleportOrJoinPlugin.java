@@ -37,13 +37,15 @@ public class DamageNullifierOnTeleportOrJoinPlugin extends JavaPlugin {
     }
 
     private void updateConfig() {
+        saveDefaultConfig();
+        reloadConfig();
         Path configFilePath = Path.of(getDataFolder().getPath(), "config.yml");
         if (!Files.exists(configFilePath)) {
             saveDefaultConfig();
             return;
         }
 
-        int version = getConfig().getInt("config-version", 1);
+        int version = getConfig().getInt("version", 1);
         LinkedList<String> lines;
         try {
             lines = new LinkedList<>(Files.readAllLines(configFilePath));
@@ -64,7 +66,7 @@ public class DamageNullifierOnTeleportOrJoinPlugin extends JavaPlugin {
 
     private void addConfigOption(List<String> lines, String configOption) {
         if (!configOption.contains("."))
-            lines.add(String.format("min-tp-distance: %s", getConfig().getString("min-tp-distance")));
+            lines.add(String.format("%s: %s", configOption, getConfig().getString(configOption)));
     }
 
     private void updateVersion(List<String> lines, int version) {
