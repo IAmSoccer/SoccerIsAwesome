@@ -1,22 +1,17 @@
 package at.iamsoccer.bukkit.plugin.soccerisawesome;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
-import at.iamsoccer.bukkit.plugin.soccerisawesome.WoodCutter;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import co.aikar.commands.PaperCommandManager;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class SoccerIsAwesomePlugin extends JavaPlugin {
     private NullifyListener nullifyListener;
@@ -30,25 +25,31 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         nullifyListener = new NullifyListener();
         getServer().getPluginManager().registerEvents(nullifyListener, this);
         reload();
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module DamageNullifierOnTeleportOrJoin has been enabled!");
         //  Try to load in all the recipes from WoodCutter, if it fails disable the plugin and print error.
         if(WoodCutter.tryCreateStonecutterRecipes()) {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "Woodcutter" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Plugin has been enabled!");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module WoodCutter has been enabled!");
         }
         else {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "Woodcutter" + ChatColor.GRAY + "]" + ChatColor.RED + " Failed to load all or some recipes.... Disabling Plugin");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module WoodCutter Failed to load all or some recipes.... Disabling Plugin");
             this.getPluginLoader().disablePlugin(this);
         }
+        // Loads Listener for Sheep Color Changer
+        getServer().getPluginManager().registerEvents(new SheepColorChangerListener(), this);
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module SheepColorChanger has been enabled!");
     }
 
     @Override
     public void onDisable() {
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module DamageNullifierOnTeleportOrJoin has been disabled!");
         if(WoodCutter.tryRemoveStonecutterRecipes()) {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "Woodcutter" + ChatColor.GRAY + "]" + ChatColor.RED + " Plugin has been disabled!");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has been disabled!");
         }
         else {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "Woodcutter" + ChatColor.GRAY + "]" + ChatColor.RED + " Failed to remove all or some recipes.... Disabling Plugin");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has Failed to remove all or some recipes.... Disabling Plugin");
             this.getPluginLoader().disablePlugin(this);
         }
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module SheepColorChanger has been disabled!");
     }
 
     public void reload() {
