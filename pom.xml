@@ -2,11 +2,11 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>at.hugo.bukkit.plugin</groupId>
-	<artifactId>damagenullifieronteleportorjoin</artifactId>
+	<groupId>at.iamsoccer.bukkit.plugin</groupId>
+	<artifactId>soccerisawesome</artifactId>
 	<version>1.1.7</version>
-	<name>DamageNullifierOnTeleportOrJoin</name>
-	<description>Damage Nullifier On Teleport Or Join</description>
+	<name>SoccerisAwesome</name>
+	<description>A Bulk Plugin for HearthCraft</description>
 
     <packaging>jar</packaging>
 
@@ -23,7 +23,6 @@
 		<finalName>${project.name}-${project.version}</finalName>
 
 		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>test</testSourceDirectory>
 
 		<defaultGoal>clean install</defaultGoal>
 
@@ -109,9 +108,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.destroystokyo.paper</groupId>
+			<groupId>io.papermc.paper</groupId>
 			<artifactId>paper-api</artifactId>
-			<version>1.16.5-R0.1-SNAPSHOT</version>
+			<version>1.19.3-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
