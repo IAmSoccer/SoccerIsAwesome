@@ -26,7 +26,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
-public class NullifyListener implements Listener {
+public class DamageNullifierOnTeleportOrJoinNullifyListener implements Listener {
     private TextComponent bossBarName = Component.text("Immunity");
     private BossBar.Color bossBarColor = BossBar.Color.RED;
     private BossBar.Overlay bossBarOverlay = BossBar.Overlay.PROGRESS;
@@ -111,7 +111,7 @@ public class NullifyListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(SoccerIsAwesomePlugin.class),
                         () -> removePlayer(player), immunityTime * 20l),
                 showBossBar
-                        ? new BossBarTimer(player, immunityTime * 20l, 1l,
+                        ? new DamageNullifierOnTeleportOrJoinBossBarTimer(player, immunityTime * 20l, 1l,
                                 BossBar.bossBar(bossBarName, 1f, bossBarColor, bossBarOverlay))
                         : null,
                 player));
@@ -120,14 +120,14 @@ public class NullifyListener implements Listener {
 
     private class PlayerInfo {
         public final BukkitTask removalTask;
-        public final BossBarTimer bossBarTask;
+        public final DamageNullifierOnTeleportOrJoinBossBarTimer bossBarTask;
         public final int fireTicks;
         public final int foodLevel;
         public final float saturation;
         public final float exhaustion;
         public final Collection<PotionEffect> potionEffects;
 
-        public PlayerInfo(final BukkitTask removalTask, final BossBarTimer bossBarTask, final Player player) {
+        public PlayerInfo(final BukkitTask removalTask, final DamageNullifierOnTeleportOrJoinBossBarTimer bossBarTask, final Player player) {
             this.removalTask = removalTask;
             this.bossBarTask = bossBarTask;
             this.fireTicks = player.getFireTicks();

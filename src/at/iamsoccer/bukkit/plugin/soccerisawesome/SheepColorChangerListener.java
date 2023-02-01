@@ -14,7 +14,7 @@ import java.util.Random;
 public class SheepColorChangerListener implements Listener {
     @EventHandler
     public void onSheepInteract(PlayerInteractEntityEvent event) {
-        if (event.isCancelled()) {
+        if (event.isCancelled() || !event.getPlayer().hasPermission("sheepcolorchanger.use")) {
             return;
         }
         if (event.getRightClicked() instanceof Sheep && event.getHand() == EquipmentSlot.HAND) {

@@ -6,7 +6,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.kyori.adventure.bossbar.BossBar;
 
-public class BossBarTimer extends BukkitRunnable {
+public class DamageNullifierOnTeleportOrJoinBossBarTimer extends BukkitRunnable {
     private final BossBar bossBar;
     private final Player player;
     private final long timeSteps;
@@ -18,7 +18,7 @@ public class BossBarTimer extends BukkitRunnable {
      * @param maxTime
      * @param remainingTime
      */
-    public BossBarTimer(final Player player, final long ticks, final long timeSteps, final BossBar bossBar) {
+    public DamageNullifierOnTeleportOrJoinBossBarTimer(final Player player, final long ticks, final long timeSteps, final BossBar bossBar) {
         this.timeSteps = timeSteps;
         this.bossBar = bossBar;
         this.player = player;

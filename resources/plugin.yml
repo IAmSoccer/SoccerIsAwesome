@@ -2,10 +2,11 @@ name: SoccerIsAwesome
 version: ${project.version}
 description: ${project.description}
 load: STARTUP
-api-version: '1.16'
+api-version: '1.19'
 author: Hugo B.
 authors:
   - IAmSoccer
+  - Lynch
 
 main: at.iamsoccer.bukkit.plugin.soccerisawesome.SoccerIsAwesomePlugin
 prefix: SIA
@@ -16,8 +17,29 @@ depend: []
 softdepend: []
 loadbefore: []
 
+
 permissions:
+# DamageNullifier Permissions
   damagenullifier.reload:
-    description: Allows you to reload the ${project.name} plugin
+    description: Allows you to reload the damagenullifier module of SIA
+    default: op
+# SheepColorChanger Permissions
+  sheepcolorchanger.use:
+    description: Allows players to change a sheeps wool color by shift right-clicking
+    default: op
+# InfiniteSnowball Permissions
+  infinitesnowball.*:
+    description: Gives access to all infinitesnowball commands
+    children:
+      infinitesnowball.use: true
+      infinitesnowball.give: true
+  infinitesnowball.give:
+    description: Allows the user to spawn an infinite snowball
+    default: op
+  infinitesnowball.use:
+    description: Allows the user to throw an infinite snowball
+    default: op
+  snowmancannon.shoot:
+    description: Allows the user to launch a fabulous snowman.
     default: op
 

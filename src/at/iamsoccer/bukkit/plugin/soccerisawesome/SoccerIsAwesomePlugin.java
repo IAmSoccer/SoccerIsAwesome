@@ -14,29 +14,39 @@ import org.bukkit.plugin.java.JavaPlugin;
 import co.aikar.commands.PaperCommandManager;
 
 public class SoccerIsAwesomePlugin extends JavaPlugin {
-    private NullifyListener nullifyListener;
+    private DamageNullifierOnTeleportOrJoinNullifyListener nullifyListener;
 
     @Override
     public void onEnable() {
+        // DamageNullifier Stuff
         updateConfig();
         reloadConfig();
         PaperCommandManager commandManager = new PaperCommandManager(this);
         commandManager.registerCommand(new DamageNullifierOnTeleportOrJoinCommand(this));
-        nullifyListener = new NullifyListener();
+        nullifyListener = new DamageNullifierOnTeleportOrJoinNullifyListener();
         getServer().getPluginManager().registerEvents(nullifyListener, this);
         reload();
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module DamageNullifierOnTeleportOrJoin has been enabled!");
+
         //  Try to load in all the recipes from WoodCutter, if it fails disable the plugin and print error.
         if(WoodCutter.tryCreateStonecutterRecipes()) {
             getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module WoodCutter has been enabled!");
         }
         else {
             getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module WoodCutter Failed to load all or some recipes.... Disabling Plugin");
-            this.getPluginLoader().disablePlugin(this);
+            this.getServer().getPluginManager().disablePlugin(this);
         }
+
         // Loads Listener for Sheep Color Changer
         getServer().getPluginManager().registerEvents(new SheepColorChangerListener(), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module SheepColorChanger has been enabled!");
+
+        // InfiniteSnowball Stuff
+        commandManager.registerCommand(new InfiniteSnowballCommands(this));
+        getServer().getPluginManager().registerEvents(new InfiniteSnowballInventoryListener(), this);
+        getServer().getPluginManager().registerEvents(new InfiniteSnowballInteractListener(), this);
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module InfiniteSnowball has been enabled!");
+        getServer().getConsoleSender().sendMessage("Hi -Lynch");
     }
 
     @Override
@@ -47,9 +57,10 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         }
         else {
             getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has Failed to remove all or some recipes.... Disabling Plugin");
-            this.getPluginLoader().disablePlugin(this);
+            this.getServer().getPluginManager().disablePlugin(this);
         }
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module SheepColorChanger has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module InfiniteSnowball has been disabled!");
     }
 
     public void reload() {
