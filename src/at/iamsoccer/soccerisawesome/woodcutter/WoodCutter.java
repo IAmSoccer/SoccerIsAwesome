@@ -1,4 +1,4 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.woodcutter;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

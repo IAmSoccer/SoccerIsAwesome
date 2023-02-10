@@ -1,5 +1,6 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.damagenullifier;
 
+import at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -13,11 +14,7 @@ public class DamageNullifierOnTeleportOrJoinBossBarTimer extends BukkitRunnable 
     private final long maxTime;
     private long remainingTime;
 
-    /**
-     * @param player
-     * @param maxTime
-     * @param remainingTime
-     */
+
     public DamageNullifierOnTeleportOrJoinBossBarTimer(final Player player, final long ticks, final long timeSteps, final BossBar bossBar) {
         this.timeSteps = timeSteps;
         this.bossBar = bossBar;

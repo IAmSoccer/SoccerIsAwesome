@@ -8,7 +8,7 @@ authors:
   - IAmSoccer
   - Lynch
 
-main: at.iamsoccer.bukkit.plugin.soccerisawesome.SoccerIsAwesomePlugin
+main: at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin
 prefix: SIA
 
 database: false

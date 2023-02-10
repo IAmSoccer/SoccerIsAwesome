@@ -1,5 +1,6 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.infinitesnowball;
 
+import at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
 import org.bukkit.*;

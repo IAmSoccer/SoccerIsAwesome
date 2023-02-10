@@ -1,4 +1,4 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.infinitesnowball;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

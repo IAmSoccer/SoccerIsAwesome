@@ -1,5 +1,6 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.damagenullifier;
 
+import at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin;
 import org.bukkit.command.CommandSender;
 
 import co.aikar.commands.BaseCommand;

@@ -1,4 +1,4 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome.infinitesnowball;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

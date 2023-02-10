@@ -1,4 +1,4 @@
-package at.iamsoccer.bukkit.plugin.soccerisawesome;
+package at.iamsoccer.soccerisawesome;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
+import at.iamsoccer.soccerisawesome.damagenullifier.*;
+import at.iamsoccer.soccerisawesome.infinitesnowball.*;
+import at.iamsoccer.soccerisawesome.sheepcolorchanger.*;
+import at.iamsoccer.soccerisawesome.woodcutter.*;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
