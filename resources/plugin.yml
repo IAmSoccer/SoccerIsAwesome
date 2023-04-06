@@ -13,7 +13,8 @@ prefix: SIA
 
 database: false
 
-depend: []
+depend:
+  - LuckPerms
 softdepend: []
 loadbefore: []
 
