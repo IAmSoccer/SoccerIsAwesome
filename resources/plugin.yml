@@ -42,4 +42,28 @@ permissions:
   snowmancannon.shoot:
     description: Allows the user to launch a fabulous snowman.
     default: op
-
+# LessAnnoyingItemFrames Permissions
+  lessannoyingitemframes.*:
+    description: Givess access to all lessannoyingitemframes commands
+    children:
+      sia.rotationtoggle: true
+      sia.containertoggle: true
+      sia.clickthroughtoggle: true
+  sia.rotationtoggle:
+    description: Allows players to use the /sia rotationtoggle which toggles all item frame rotation
+    default: op
+  sia.containertoggle:
+    description: Allows players to use the /sia containertoggle which toggles all item frame rotation when they are on chests and barrels
+    default: op
+  sia.clickthroughtoggle:
+    description: Allows players to use the /sia clickthroughtoggle which toggles the ability to click through item frames on chests and barrels
+    default: op
+  sia.rotationtoggle.enabled:
+    description: A permission to show if a player has /sia rotationtoggle enabled
+    default: false
+  sia.containertoggle.enabled:
+    description: A permission to show if a player has /sia containertoggle enabled
+    default: false
+  sia.clickthroughtoggle.enabled:
+    description: A permission to show if a player has /sia clickthroughtoggle enabled
+    default: false
