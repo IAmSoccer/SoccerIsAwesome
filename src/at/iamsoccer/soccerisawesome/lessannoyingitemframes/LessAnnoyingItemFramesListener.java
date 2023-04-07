@@ -26,7 +26,7 @@ public class LessAnnoyingItemFramesListener implements Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onItemFrameRotate(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
-        if (player.isSneaking() || !player.hasPermission("sia.rotationtoggle.enabled") && !player.hasPermission("sia.clickthroughtoggle.enabled") && !player.hasPermission("cancelallitemframerotate.enabled")) {
+        if (player.isSneaking() || (!player.hasPermission("sia.rotationtoggle.enabled") && !player.hasPermission("sia.clickthroughtoggle.enabled") && !player.hasPermission("sia.containertoggle.enabled"))) {
             return;
         }
         Entity entity = event.getRightClicked();
@@ -81,8 +81,8 @@ public class LessAnnoyingItemFramesListener implements Listener {
 
     // Checks what inventory block it is (We just want to check Chests and Barrels) then handle each block properly
     public void blockTypeChecker(Player player, BlockState state) {
-        if (state instanceof Chest) {
-            Inventory inventory = ((Chest) state).getBlockInventory();
+        if (state instanceof Chest chest) {
+            Inventory inventory = chest.getInventory();
             player.openInventory(inventory);
         } else if (state instanceof Barrel barrel) {
             Inventory inventory = barrel.getInventory();
@@ -90,3 +90,4 @@ public class LessAnnoyingItemFramesListener implements Listener {
         }
     }
 }
+

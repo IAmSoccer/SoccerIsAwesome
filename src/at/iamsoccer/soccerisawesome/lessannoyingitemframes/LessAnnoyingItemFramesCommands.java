@@ -22,13 +22,13 @@ public class LessAnnoyingItemFramesCommands extends BaseCommand {
     @Subcommand("rotationtoggle")
     @CommandPermission("sia.rotationtoggle")
     public void onAllRotationToggle(CommandSender sender) {
-        togglePermission(sender, "sia.rotationtoggle", "All item frame rotation has been Enabled", "All item frame rotation has been Disabled");
+        togglePermission(sender, "sia.rotationtoggle", "Cancel all item frame rotation has been Enabled", "Cancel all item frame rotation has been Disabled");
     }
 
     @Subcommand("containertoggle")
     @CommandPermission("sia.containertoggle")
     public void onAllContainerToggle(CommandSender sender) {
-        togglePermission(sender, "sia.containertoggle", "Item frame rotation on Chests and Barrels has been Enabled", "Item frame rotation on Chests and Barrels has been Disabled");
+        togglePermission(sender, "sia.containertoggle", "Cancel item frame rotation on Chests and Barrels has been Enabled", "Cancel item frame rotation on Chests and Barrels has been Disabled");
     }
 
     @Subcommand("clickthroughtoggle")
