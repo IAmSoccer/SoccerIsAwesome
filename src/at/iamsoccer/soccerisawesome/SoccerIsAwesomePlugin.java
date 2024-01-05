@@ -12,6 +12,7 @@ import at.iamsoccer.soccerisawesome.damagenullifier.*;
 import at.iamsoccer.soccerisawesome.infinitesnowball.*;
 import at.iamsoccer.soccerisawesome.lessannoyingitemframes.LessAnnoyingItemFramesCommands;
 import at.iamsoccer.soccerisawesome.lessannoyingitemframes.LessAnnoyingItemFramesListener;
+import at.iamsoccer.soccerisawesome.prettycoloredglass.PrettyColoredGlassListener;
 import at.iamsoccer.soccerisawesome.sheepcolorchanger.*;
 import at.iamsoccer.soccerisawesome.woodcutter.*;
 import org.bukkit.ChatColor;
@@ -58,6 +59,9 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         commandManager.registerCommand(new LessAnnoyingItemFramesCommands(this));
         getServer().getPluginManager().registerEvents(new LessAnnoyingItemFramesListener(), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module LessAnnoyingItemFrames has been enabled!");
+
+        getServer().getPluginManager().registerEvents(new PrettyColoredGlassListener(), this);
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module PrettyColoredClass has been enabled!");
     }
 
     @Override
@@ -73,6 +77,7 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module SheepColorChanger has been disabled!");
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module InfiniteSnowball has been disabled!");
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module LessAnnoyingItemFrames has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module PrettyColoredClass has been disabled!");
     }
 
     public void reload() {

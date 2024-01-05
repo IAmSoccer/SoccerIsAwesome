@@ -1,4 +1,4 @@
-name: SoccerIsAwesome
+name: SHIA
 version: ${project.version}
 description: ${project.description}
 load: STARTUP
@@ -68,3 +68,7 @@ permissions:
   sia.clickthroughtoggle.enabled:
     description: A permission to show if a player has /sia clickthroughtoggle enabled
     default: false
+  # Pretty Colored Glass Permissions
+  sia.colorglass.use:
+    description: Allows you to color glass with dye in your hand
+    default: op

@@ -4,8 +4,8 @@
 
 	<groupId>at.iamsoccer.bukkit.plugin</groupId>
 	<artifactId>soccerisawesome</artifactId>
-	<version>1.1.11</version>
-	<name>SoccerisAwesome</name>
+	<version>1.1.12</version>
+	<name>SHIA</name>
 	<description>A Bulk Plugin for HearthCraft</description>
 
     <packaging>jar</packaging>
