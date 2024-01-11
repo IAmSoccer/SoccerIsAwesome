@@ -1,4 +1,4 @@
-package at.iamsoccer.soccerisawesome.damagenullifier;
+package at.iamsoccer.soccerisawesome.essentialsafkhook;
 
 import at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin;
 import org.bukkit.command.CommandSender;
@@ -8,19 +8,19 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Subcommand;
 
-@CommandAlias("damagenullifier")
-public class DamageNullifierOnTeleportOrJoinCommand extends BaseCommand {
+@CommandAlias("essentialsafk")
+public class EssentialsAFKHookCommands extends BaseCommand {
     private final SoccerIsAwesomePlugin plugin;
 
-    public DamageNullifierOnTeleportOrJoinCommand(SoccerIsAwesomePlugin plugin) {
+    public EssentialsAFKHookCommands(SoccerIsAwesomePlugin plugin) {
         this.plugin = plugin;
     }
 
     @Subcommand("reload")
-    @CommandPermission("damagenullifier.reload")
+    @CommandPermission("sia.essentialsafk.reload")
     public void onReload(CommandSender sender) {
-        sender.sendMessage("[DamageNullifier] Reloading");
-        plugin.damagenullifyReload();
-        sender.sendMessage("[DamageNullifier] Reloaded");
+        sender.sendMessage("[Essentials AFK Hook] Reloading");
+        this.plugin.EssentialsAFKHookListener.reload();
+        sender.sendMessage("[Essentials AFK Hook] Reloaded");
     }
 }

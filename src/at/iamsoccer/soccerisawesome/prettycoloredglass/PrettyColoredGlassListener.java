@@ -1,6 +1,6 @@
 package at.iamsoccer.soccerisawesome.prettycoloredglass;
 
-import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
@@ -70,8 +70,8 @@ public class PrettyColoredGlassListener implements Listener {
         breakEvent.callEvent();
         if (breakEvent.isCancelled()) return; // cant break blocks here
         // no need to check block place event, since if he can break it he can very probably also build here, else its just a weird area, no?
-        // reduce item amount
-        event.getItem().setAmount(event.getItem().getAmount() - 1);
+        // reduce item amount unless they in creative
+        if (event.getPlayer().getGameMode() != GameMode.CREATIVE) event.getItem().setAmount(event.getItem().getAmount() - 1);
         // set new color
         final var oldData = clickedBlock.getBlockData();
         clickedBlock.setType(newBlockMaterial);

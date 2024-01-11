@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import at.iamsoccer.soccerisawesome.damagenullifier.*;
+import at.iamsoccer.soccerisawesome.essentialsafkhook.EssentialsAFKHookCommands;
+import at.iamsoccer.soccerisawesome.essentialsafkhook.EssentialsAFKHookListener;
 import at.iamsoccer.soccerisawesome.infinitesnowball.*;
 import at.iamsoccer.soccerisawesome.lessannoyingitemframes.LessAnnoyingItemFramesCommands;
 import at.iamsoccer.soccerisawesome.lessannoyingitemframes.LessAnnoyingItemFramesListener;
@@ -21,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import co.aikar.commands.PaperCommandManager;
 
 public class SoccerIsAwesomePlugin extends JavaPlugin {
+    public at.iamsoccer.soccerisawesome.essentialsafkhook.EssentialsAFKHookListener EssentialsAFKHookListener;
     private DamageNullifierOnTeleportOrJoinNullifyListener nullifyListener;
 
     @Override
@@ -32,55 +35,63 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         commandManager.registerCommand(new DamageNullifierOnTeleportOrJoinCommand(this));
         nullifyListener = new DamageNullifierOnTeleportOrJoinNullifyListener();
         getServer().getPluginManager().registerEvents(nullifyListener, this);
-        reload();
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module DamageNullifierOnTeleportOrJoin has been enabled!");
+        damagenullifyReload();
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module DamageNullifierOnTeleportOrJoin has been enabled!");
 
         //  Try to load in all the recipes from WoodCutter, if it fails disable the plugin and print error.
         if(WoodCutter.tryCreateStonecutterRecipes()) {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module WoodCutter has been enabled!");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module WoodCutter has been enabled!");
         }
         else {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module WoodCutter Failed to load all or some recipes.... Disabling Plugin");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module WoodCutter Failed to load all or some recipes.... Disabling Plugin");
             this.getServer().getPluginManager().disablePlugin(this);
         }
 
         // Loads Listener for Sheep Color Changer
         getServer().getPluginManager().registerEvents(new SheepColorChangerListener(), this);
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module SheepColorChanger has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module SheepColorChanger has been enabled!");
 
         // InfiniteSnowball Stuff
         commandManager.registerCommand(new InfiniteSnowballCommands(this));
         getServer().getPluginManager().registerEvents(new InfiniteSnowballInventoryListener(), this);
         getServer().getPluginManager().registerEvents(new InfiniteSnowballInteractListener(), this);
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module InfiniteSnowball has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module InfiniteSnowball has been enabled!");
         getServer().getConsoleSender().sendMessage("Hi -Lynch");
 
         // LessAnnoyingItemFrame Stuff
         commandManager.registerCommand(new LessAnnoyingItemFramesCommands(this));
         getServer().getPluginManager().registerEvents(new LessAnnoyingItemFramesListener(), this);
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module LessAnnoyingItemFrames has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module LessAnnoyingItemFrames has been enabled!");
 
+        // PrettyColoredGlass Stuff
         getServer().getPluginManager().registerEvents(new PrettyColoredGlassListener(), this);
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module PrettyColoredClass has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module PrettyColoredClass has been enabled!");
+
+        //EssentialsAFKHook Stuff
+        commandManager.registerCommand(new EssentialsAFKHookCommands(this));
+        EssentialsAFKHookListener = new EssentialsAFKHookListener(this);
+        getServer().getPluginManager().registerEvents(EssentialsAFKHookListener, this);
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module EssentialsAFKHook has been enabled!");
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module DamageNullifierOnTeleportOrJoin has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module DamageNullifierOnTeleportOrJoin has been disabled!");
         if(WoodCutter.tryRemoveStonecutterRecipes()) {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has been disabled!");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has been disabled!");
         }
         else {
-            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has Failed to remove all or some recipes.... Disabling Plugin");
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module Woodcutter has Failed to remove all or some recipes.... Disabling Plugin");
             this.getServer().getPluginManager().disablePlugin(this);
         }
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module SheepColorChanger has been disabled!");
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module InfiniteSnowball has been disabled!");
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module LessAnnoyingItemFrames has been disabled!");
-        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module PrettyColoredClass has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module SheepColorChanger has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module InfiniteSnowball has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module LessAnnoyingItemFrames has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module PrettyColoredClass has been disabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module EssentialsAFKHook has been disabled!");
     }
 
-    public void reload() {
+    public void damagenullifyReload() {
         saveDefaultConfig();
         reloadConfig();
         nullifyListener.update(getConfig().getLong("min-tp-distance"), getConfig().getLong("immunity-time"),

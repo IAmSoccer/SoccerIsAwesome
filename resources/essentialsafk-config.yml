@@ -1,0 +1,12 @@
+afk.message:
+  fran:
+    message: "* {0} is dancing, redirect your questions to eon. 2" # the message that is broadcasted to the server when he goes afk
+    msg-response: "redirect your questions to eon. 2" # what someone sees as the afk message of the player for example when someone msgs to the player
+  eon:
+    message: "* {0} is dancing, redirect your questions to fran."
+    msg-response: "redirect your questions to fran."
+
+
+afk.message2:
+  message: "* {0} is dancing, redirect your questions to ded."
+  msg-response: "redirect your questions to ded."

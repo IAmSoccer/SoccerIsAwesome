@@ -9,12 +9,13 @@ authors:
   - Lynch
 
 main: at.iamsoccer.soccerisawesome.SoccerIsAwesomePlugin
-prefix: SIA
+prefix: SHIA
 
 database: false
 
 depend:
   - LuckPerms
+  - Essentials
 softdepend: []
 loadbefore: []
 
@@ -71,4 +72,8 @@ permissions:
   # Pretty Colored Glass Permissions
   sia.colorglass.use:
     description: Allows you to color glass with dye in your hand
+    default: op
+  # Essentials AFK Hook Permissions
+  sia.essentialsafk.reload:
+    description: Allows you to reload the Essentials AFK config
     default: op
