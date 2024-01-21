@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
+import at.iamsoccer.soccerisawesome.colorfulshulkers.ColorfulShulkers;
 import at.iamsoccer.soccerisawesome.damagenullifier.*;
 import at.iamsoccer.soccerisawesome.essentialsafkhook.EssentialsAFKHookCommands;
 import at.iamsoccer.soccerisawesome.essentialsafkhook.EssentialsAFKHookListener;
@@ -72,6 +73,15 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         EssentialsAFKHookListener = new EssentialsAFKHookListener(this);
         getServer().getPluginManager().registerEvents(EssentialsAFKHookListener, this);
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module EssentialsAFKHook has been enabled!");
+
+        //  Try to load in all the recipes from ColorfulShulkers, if it fails disable the plugin and print error.
+        if(ColorfulShulkers.tryCreateColorfulShulkerRecipes()) {
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.GREEN + " Module ColorfulShulkers has been enabled!");
+        }
+        else {
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module ColorfulShulkers Failed to load all or some recipes.... Disabling Plugin");
+            this.getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
@@ -89,6 +99,13 @@ public class SoccerIsAwesomePlugin extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module LessAnnoyingItemFrames has been disabled!");
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module PrettyColoredClass has been disabled!");
         getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module EssentialsAFKHook has been disabled!");
+        if(ColorfulShulkers.tryRemoveColorfulShulkerRecipes()) {
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module ColorfulShulkers has been disabled!");
+        }
+        else {
+            getServer().getConsoleSender().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "SHIA" + ChatColor.GRAY + "]" + ChatColor.RED + " Module ColorfulShulkers has Failed to remove all or some recipes.... Disabling Plugin");
+            this.getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     public void damagenullifyReload() {
